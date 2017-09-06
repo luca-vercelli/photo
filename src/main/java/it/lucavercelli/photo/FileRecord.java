@@ -12,16 +12,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "files")
-@NamedQueries({ @NamedQuery(name = "selectByName", query = "FROM FileRecord WHERE filename = ?"),
-		@NamedQuery(name = "selectBySize", query = "from FileRecord WHERE filesize = ? "),
-		@NamedQuery(name = "selectBySizeExcluded", query = "from FileRecord WHERE filesize = ? AND filename <> ?"),
-		@NamedQuery(name = "selectBySizeNoHash", query = "from FileRecord WHERE filesize = ? AND filename <> ? AND filehash IS NULL"),
-		@NamedQuery(name = "selectByDuplicated", query = "from FileRecord WHERE duplicated = ? "),
-		@NamedQuery(name = "selectByHash", query = "from FileRecord WHERE filehash = ? "),
-		@NamedQuery(name = "selectByHashExcluded", query = "from FileRecord WHERE filehash = ? AND filename <> ? "),
+@NamedQueries({ @NamedQuery(name = "selectByName", query = "FROM FileRecord WHERE filename = :fn"),
+		@NamedQuery(name = "selectBySize", query = "from FileRecord WHERE filesize = :fn "),
+		@NamedQuery(name = "selectBySizeExcluded", query = "from FileRecord WHERE filesize = :sz AND filename <> :fn "),
+		@NamedQuery(name = "selectBySizeNoHash", query = "from FileRecord WHERE filesize = :sz AND filename <> :fn AND filehash IS NULL"),
+		@NamedQuery(name = "selectByDuplicated", query = "from FileRecord WHERE duplicated = :dupl "),
+		@NamedQuery(name = "selectByHash", query = "from FileRecord WHERE filehash = :hash "),
+		@NamedQuery(name = "selectByHashExcluded", query = "from FileRecord WHERE filehash = :hash AND filename <> :fn "),
 		@NamedQuery(name = "selectDuplicated", query = "from FileRecord WHERE duplicated IS NOT NULL") })
 @NamedNativeQueries({
-		@NamedNativeQuery(name = "updateNoDuplicated", query = "UPDATE files SET duplicated = NULL WHERE duplicated = ? ") })
+		@NamedNativeQuery(name = "updateNoDuplicated", query = "UPDATE files SET duplicated = NULL WHERE duplicated = :dupl ") })
 public class FileRecord {
 
 	@Id
