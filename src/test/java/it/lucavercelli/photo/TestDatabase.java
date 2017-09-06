@@ -17,6 +17,10 @@ import org.junit.Before;
 
 public class TestDatabase {
 
+	static {
+		System.setProperty("derby.system.home", System.getProperty("user.home"));
+	}
+
 	EntityManagerFactory ef = null;
 	EntityManager em = null;
 	FileDAO fileDAO = null;

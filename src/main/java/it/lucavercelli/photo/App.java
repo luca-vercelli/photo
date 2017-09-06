@@ -24,6 +24,8 @@ public class App {
 
 	public static void main(String[] args) throws Exception {
 
+		System.setProperty("derby.system.home", System.getProperty("user.home"));
+		
 		Options options = new Options(args);
 
 		if (options.usage) {
