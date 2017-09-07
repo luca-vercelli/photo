@@ -221,7 +221,7 @@ public class App {
 		// duplicate.
 		FileRecord oneDuplicated = fileDAO.selectOneDuplicated(mediaFile);
 		if (oneDuplicated != null) {
-			mediaFile.duplicato = oneDuplicated;
+			mediaFile.duplicated = oneDuplicated;
 			fileDAO.save(mediaFile);
 			System.out.println("DUPLICATED OF: " + oneDuplicated.filename);
 			return;
@@ -245,7 +245,7 @@ public class App {
 		if (someThingDone) {
 			oneDuplicated = fileDAO.selectOneDuplicated(mediaFile);
 			if (oneDuplicated != null) {
-				mediaFile.duplicato = oneDuplicated;
+				mediaFile.duplicated = oneDuplicated;
 				fileDAO.save(mediaFile);
 				System.out.println("DUPLICATED OF: " + oneDuplicated.filename);
 				return;
@@ -267,7 +267,7 @@ public class App {
 
 			if (fileDAO.selectByHashExcludedThis(f).isEmpty()) {
 				// This is wrongly marked as duplicated
-				f.duplicato = null;
+				f.duplicated = null;
 				fileDAO.save(f);
 
 			} else {

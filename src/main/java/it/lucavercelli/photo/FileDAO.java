@@ -22,30 +22,30 @@ public class FileDAO {
 	}
 
 	public List<FileRecord> selectBySize(FileRecord f) throws SQLException {
-		return em.createNamedQuery("selectBySize", FileRecord.class).setParameter(":fn", f.filename).getResultList();
+		return em.createNamedQuery("selectBySize", FileRecord.class).setParameter("fn", f.filename).getResultList();
 	}
 
 	public List<FileRecord> selectBySizeExcludedThis(FileRecord f) throws SQLException {
-		return em.createNamedQuery("selectBySizeExcluded", FileRecord.class).setParameter(":sz", f.filesize)
-				.setParameter(":fn", f.filename).getResultList();
+		return em.createNamedQuery("selectBySizeExcluded", FileRecord.class).setParameter("sz", f.filesize)
+				.setParameter("fn", f.filename).getResultList();
 	}
 
 	public List<FileRecord> selectBySizeExcludedThisNoHash(FileRecord f) throws SQLException {
-		return em.createNamedQuery("selectBySizeNoHash", FileRecord.class).setParameter(":sz", f.filesize)
-				.setParameter(":fn", f.filename).getResultList();
+		return em.createNamedQuery("selectBySizeNoHash", FileRecord.class).setParameter("sz", f.filesize)
+				.setParameter("fn", f.filename).getResultList();
 	}
 
 	public List<FileRecord> selectByDuplicated(FileRecord f) throws SQLException {
-		return em.createNamedQuery("selectByDuplicated", FileRecord.class).setParameter(":dupl", f.filename).getResultList();
+		return em.createNamedQuery("selectByDuplicated", FileRecord.class).setParameter("dupl", f.filename).getResultList();
 	}
 
 	public List<FileRecord> selectByHash(String filehash) throws SQLException {
-		return em.createNamedQuery("selectByHash", FileRecord.class).setParameter(":hash", filehash).getResultList();
+		return em.createNamedQuery("selectByHash", FileRecord.class).setParameter("hash", filehash).getResultList();
 	}
 
 	public List<FileRecord> selectByHashExcludedThis(FileRecord f) throws SQLException {
-		return em.createNamedQuery("selectByHashExcluded", FileRecord.class).setParameter(":hash", f.filehash)
-				.setParameter(":fn", f.filename).getResultList();
+		return em.createNamedQuery("selectByHashExcluded", FileRecord.class).setParameter("hash", f.filehash)
+				.setParameter("fn", f.filename).getResultList();
 	}
 
 	/**
@@ -56,8 +56,8 @@ public class FileDAO {
 	 * @throws SQLException
 	 */
 	public FileRecord selectOneDuplicated(FileRecord f) throws SQLException {
-		List<FileRecord> list = em.createNamedQuery("selectByHashExcluded", FileRecord.class).setParameter(":hash", f.filehash)
-				.setParameter(":fn", f.filename).setMaxResults(1).getResultList();
+		List<FileRecord> list = em.createNamedQuery("selectByHashExcluded", FileRecord.class).setParameter("hash", f.filehash)
+				.setParameter("fn", f.filename).setMaxResults(1).getResultList();
 		return list.isEmpty() ? null : list.get(0);
 	}
 
@@ -66,7 +66,7 @@ public class FileDAO {
 	}
 
 	public List<FileRecord> updateNoDuplicated(FileRecord f) throws SQLException {
-		return em.createNamedQuery("updateNoDuplicated", FileRecord.class).setParameter(":dupl", f.filename).getResultList();
+		return em.createNamedQuery("updateNoDuplicated", FileRecord.class).setParameter("dupl", f.filename).getResultList();
 	}
 
 	/**
@@ -95,9 +95,9 @@ public class FileDAO {
 				f.filesize = file.length();
 				f.lastModified = file.lastModified();
 				f.filehash = null;
-				f.duplicato = null;
+				f.duplicated = null;
 
-				em.createNamedQuery("updateNoDuplicated").setParameter(":dupl", f.filename).executeUpdate();
+				em.createNamedQuery("updateNoDuplicated").setParameter("dupl", f.filename).executeUpdate();
 				// TODO update with some other file with same hash
 			}
 		}

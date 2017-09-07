@@ -38,16 +38,16 @@ public class FileRecord {
 	public String filehash;
 
 	@ManyToOne
-	public FileRecord duplicato;
+	public FileRecord duplicated;
 
 	public FileRecord() {
 	}
 
-	public FileRecord(String filename, long filesize, long lastModified, String filehash, FileRecord duplicato) {
+	public FileRecord(String filename, long filesize, long lastModified, String filehash, FileRecord duplicated) {
 		this.filename = filename;
 		this.filesize = filesize;
 		this.filehash = filehash;
-		this.duplicato = duplicato;
+		this.duplicated = duplicated;
 	}
 
 }

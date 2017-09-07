@@ -32,35 +32,22 @@ public class TestMoveFiles {
 		File f1 = getResource("./folder_a/video1.mp4");
 		File f2 = getResource("./folder_a/img1.png");
 		File f3 = getResource("./folder_b/video2.mp4");
-
-		System.out.println(f1.getAbsolutePath());
-		System.out.println(f2.getAbsolutePath());
-		System.out.println(f3.getAbsolutePath());
-		if (!(f1.exists()))
-			fail("Set up error: missing resource files");
-		if (!(f2.exists()))
-			fail("Set up error: missing resource files");
-		if (!(f3.exists()))
-			fail("Set up error: missing resource files");
+		
+		assertTrue("Set up error: missing resource files", f1.exists() && f2.exists() && f3.exists());
 
 		Options opt = new Options(new String[] { "--move-videos" });
-		if (!(opt.moveVideosToFolder))
-			fail("Options should include 'moveVideosToFolder'");
+		assertTrue("Options should include 'moveVideosToFolder'", opt.moveVideosToFolder);
 
 		App app = new App(opt);
 		app.mainLoop();
 
-		if ((f1.exists() || f3.exists()))
-			fail("Videos should move");
-
-		if (!(f2.exists()))
-			fail("Images should't move");
+		assertFalse("Videos should move", f1.exists() || f3.exists());
+		assertTrue("Images should't move", f2.exists());
 
 		File f1a = getResource("./video/video1.mp4");
 		File f3a = getResource("./video/video2.mp4");
 
-		if (!(f1a.exists() && f3a.exists()))
-			fail("Where the hell videos were moved?");
+		assertTrue("Where the hell videos were moved?", f1a.exists() && f3a.exists());
 
 		f1a.renameTo(f1);
 		f3a.renameTo(f3);
