@@ -86,8 +86,11 @@ public class TestDatabase {
 
 		FileRecord fr2 = list2.get(0);
 
-		assertTrue("Exactly one of the files should be marked duplicated",
+		assertTrue("At least one of the files should be marked duplicated",
 				fr1.duplicated != null || fr2.duplicated != null);
+
+		assertTrue("At most one of the files should be marked duplicated",
+				fr1.duplicated == null || fr2.duplicated == null);
 
 	}
 
