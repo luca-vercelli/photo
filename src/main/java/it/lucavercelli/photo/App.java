@@ -165,6 +165,7 @@ public class App {
 	}
 
 	private void refreshDatabase() throws SQLException, NoSuchAlgorithmException, IOException {
+		System.out.println("Refreshing database...");
 		File folder = new File(".").getAbsoluteFile();
 		refreshDatabase(folder);
 	}
@@ -172,7 +173,7 @@ public class App {
 	private void refreshDatabase(File folder) throws SQLException, NoSuchAlgorithmException, IOException {
 
 		File[] mediaFiles = folder.listFiles(new MediaFileFilter());
-
+		
 		for (File file : mediaFiles) {
 
 			System.out.println(file.getPath());

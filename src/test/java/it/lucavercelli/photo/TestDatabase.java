@@ -70,6 +70,10 @@ public class TestDatabase {
 		App app = new App(opt);
 		app.mainLoop();
 
+		List<FileRecord> test = em.createQuery("from FileRecord ", FileRecord.class).getResultList();
+		System.out.println(test);
+		System.out.println(f1.getPath());
+
 		List<FileRecord> list1 = em.createQuery("from FileRecord where filename = :fn ", FileRecord.class)
 				.setParameter("fn", f1.getPath()).getResultList();
 

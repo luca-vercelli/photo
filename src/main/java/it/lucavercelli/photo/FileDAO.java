@@ -36,7 +36,8 @@ public class FileDAO {
 	}
 
 	public List<FileRecord> selectByDuplicated(FileRecord f) throws SQLException {
-		return em.createNamedQuery("selectByDuplicated", FileRecord.class).setParameter("dupl", f.filename).getResultList();
+		return em.createNamedQuery("selectByDuplicated", FileRecord.class).setParameter("dupl", f.filename)
+				.getResultList();
 	}
 
 	public List<FileRecord> selectByHash(String filehash) throws SQLException {
@@ -56,8 +57,8 @@ public class FileDAO {
 	 * @throws SQLException
 	 */
 	public FileRecord selectOneDuplicated(FileRecord f) throws SQLException {
-		List<FileRecord> list = em.createNamedQuery("selectByHashExcluded", FileRecord.class).setParameter("hash", f.filehash)
-				.setParameter("fn", f.filename).setMaxResults(1).getResultList();
+		List<FileRecord> list = em.createNamedQuery("selectByHashExcluded", FileRecord.class)
+				.setParameter("hash", f.filehash).setParameter("fn", f.filename).setMaxResults(1).getResultList();
 		return list.isEmpty() ? null : list.get(0);
 	}
 
@@ -66,7 +67,8 @@ public class FileDAO {
 	}
 
 	public List<FileRecord> updateNoDuplicated(FileRecord f) throws SQLException {
-		return em.createNamedQuery("updateNoDuplicated", FileRecord.class).setParameter("dupl", f.filename).getResultList();
+		return em.createNamedQuery("updateNoDuplicated", FileRecord.class).setParameter("dupl", f.filename)
+				.getResultList();
 	}
 
 	/**
@@ -102,11 +104,11 @@ public class FileDAO {
 			}
 		}
 
-		return f;
+		return save(f);
 	}
 
-	public void save(FileRecord f) {
-		em.merge(f);
+	public FileRecord save(FileRecord f) {
+		return em.merge(f);
 	}
 
 	/**

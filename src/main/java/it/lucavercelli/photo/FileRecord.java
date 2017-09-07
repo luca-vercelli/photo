@@ -46,8 +46,13 @@ public class FileRecord {
 	public FileRecord(String filename, long filesize, long lastModified, String filehash, FileRecord duplicated) {
 		this.filename = filename;
 		this.filesize = filesize;
+		this.lastModified = lastModified;
 		this.filehash = filehash;
 		this.duplicated = duplicated;
 	}
 
+	@Override
+	public String toString() {
+		return "File " + this.filename;
+	}
 }
